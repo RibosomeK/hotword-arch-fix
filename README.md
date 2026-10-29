@@ -1,12 +1,9 @@
 # Hotword Arch Fix
 
-作者：Claude
+作者：D老师
 
 一个 LSPosed 模块，用于修复 OnePlus 15R（OxygenOS 16 / Android 16）上
 Google 应用无法使用 DSP 熄屏 "Hey Google" 热词的问题。
-
-> 本模块只包含“熄屏唤醒修复”。Gemini Live 的锁屏进入 / 默认 Live 功能在
-> 另一个独立项目 [gemini-live-tweaks](../gemini-live-tweaks/) 中。
 
 ## 功能
 
@@ -113,5 +110,13 @@ XPOSED_JAR=libs/api-82.jar \
   module `apk_path` 与 `pm path moe.debug.hotwordarch` 一致；使用
   `--no-incremental` 并重启目标进程可以减少相关故障。
 - 禁用/卸载模块并重启即可回滚。
-- 本仓库不包含 Gemini Live 功能，也没有从 Google 获取任何私有 API 授权；
-  仅供个人设备兼容性研究使用。按现状提供，无任何担保。
+- 本模块仅处理 SoundTrigger / 熄屏热词问题，不涉及助手界面或其它功能；
+  也没有从 Google 获取任何私有 API 授权。仅供个人设备兼容性研究使用，
+  按现状提供，无任何担保。
+
+## License
+
+本项目代码采用 WTFPL v2 授权，完整文本见 [LICENSE](LICENSE)。
+
+注意：`libs/api-82.jar` 是 Xposed API 82，仍遵循其原始 Apache-2.0
+许可，不适用本项目的 WTFPL。
