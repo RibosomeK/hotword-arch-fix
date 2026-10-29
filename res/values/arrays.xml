@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="xposed_scope">
+        <item>com.google.android.googlequicksearchbox</item>
+        <!-- LSPosed stores the system_server scope as "system"; the module also
+             accepts this legacy "android" entry. Select System Framework in the
+             LSPosed manager. -->
+        <item>android</item>
+    </string-array>
+</resources>
