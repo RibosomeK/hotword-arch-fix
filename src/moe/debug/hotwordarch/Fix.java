@@ -34,10 +34,10 @@ public final class Fix implements IXposedHookLoadPackage {
         if (!TARGET_PKG.equals(lp.packageName)) {
             return;
         }
-        hookGoogleApp(lp);
+        hookGoogleApp();
     }
 
-    private static void hookGoogleApp(XC_LoadPackage.LoadPackageParam lp) {
+    private static void hookGoogleApp() {
         try {
             Class<?> mp = XposedHelpers.findClass(
                     "android.hardware.soundtrigger.SoundTrigger$ModuleProperties", null);
@@ -52,13 +52,11 @@ public final class Fix implements IXposedHookLoadPackage {
                     }
                 }
             });
-            XposedBridge.log(TAG + "arch hook installed in " + lp.processName);
         } catch (Throwable t) {
             XposedBridge.log(TAG + "arch hook failed: " + t);
         }
 
-        // Keep the client Identity consistent before list/attach calls. This was
-        // part of the tested configuration and is harmless.
+        // Keep the client Identity consistent before list/attach calls.
         try {
             Class<?> proxy = XposedHelpers.findClass(
                     "com.android.internal.app.ISoundTriggerService$Stub$Proxy", null);
@@ -112,8 +110,6 @@ public final class Fix implements IXposedHookLoadPackage {
                                     candidate, "getId");
                             if (candidateId == id) {
                                 param.args[0] = candidate;
-                                XposedBridge.log(TAG
-                                        + "replaced ModuleProperties id=" + id);
                                 break;
                             }
                         }
@@ -122,7 +118,6 @@ public final class Fix implements IXposedHookLoadPackage {
                     }
                 }
             });
-            XposedBridge.log(TAG + "system_server hook installed");
         } catch (Throwable t) {
             XposedBridge.log(TAG + "system_server hook failed: " + t);
         }
